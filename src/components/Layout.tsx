@@ -23,6 +23,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     { name: "Services", path: "/services" },
     { name: "Case Studies", path: "/case-studies" },
     { name: "Blog", path: "/blog" },
+    { name: "Careers", path: "/careers" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -64,11 +65,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
             {/* CTA Button */}
             <div className="hidden lg:flex items-center space-x-4">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="border-muted-foreground text-muted-foreground hover:bg-muted hover:text-foreground">
                 <Phone className="w-4 h-4 mr-2" />
                 Call Us
               </Button>
-              <Button className="bg-gradient-primary hover:shadow-primary">
+              <Button className="bg-gradient-primary hover:shadow-primary text-white">
                 Get Started
               </Button>
             </div>
