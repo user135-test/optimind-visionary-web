@@ -1,6 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { 
   CheckCircle, 
   Users, 
@@ -72,18 +69,19 @@ const Careers = () => {
             <h2 className="text-4xl font-bold text-center mb-16 text-foreground">
               Why Work With Us
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="row g-4">
               {benefits.map((benefit, index) => (
-                <div 
-                  key={index}
-                  className="flex items-start space-x-4 group hover:translate-x-2 transition-transform duration-300"
-                >
-                  <div className="flex-shrink-0 w-8 h-8 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <CheckCircle className="w-5 h-5 text-white" />
+                <div key={index} className="col-12 col-md-6">
+                  <div className="d-flex align-items-start group hover:translate-x-2 transition-transform duration-300">
+                    <div className="flex-shrink-0 me-3">
+                      <div className="w-8 h-8 bg-accent rounded-circle d-flex align-items-center justify-content-center">
+                        <CheckCircle className="text-white" size={20} />
+                      </div>
+                    </div>
+                    <p className="text-lg text-muted-foreground mb-0">
+                      {benefit}
+                    </p>
                   </div>
-                  <p className="text-lg text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                    {benefit}
-                  </p>
                 </div>
               ))}
             </div>
@@ -97,33 +95,41 @@ const Careers = () => {
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">
             Our Culture & Values
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <div className="text-center group">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Heart className="w-8 h-8 text-white" />
+          <div className="row g-4 max-w-6xl mx-auto">
+            <div className="col-12 col-sm-6 col-lg-3 text-center">
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                  <Heart className="text-white" size={32} />
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Integrity</h3>
+              <h3 className="h5 fw-semibold mb-2">Integrity</h3>
               <p className="text-muted-foreground">Honest, transparent relationships built on trust</p>
             </div>
-            <div className="text-center group">
-              <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Users className="w-8 h-8 text-white" />
+            <div className="col-12 col-sm-6 col-lg-3 text-center">
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-secondary rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                  <Users className="text-white" size={32} />
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Client-first</h3>
+              <h3 className="h5 fw-semibold mb-2">Client-first</h3>
               <p className="text-muted-foreground">Your success is our primary focus</p>
             </div>
-            <div className="text-center group">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <TrendingUp className="w-8 h-8 text-white" />
+            <div className="col-12 col-sm-6 col-lg-3 text-center">
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-accent rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                  <TrendingUp className="text-white" size={32} />
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Continuous Learning</h3>
+              <h3 className="h5 fw-semibold mb-2">Continuous Learning</h3>
               <p className="text-muted-foreground">Always growing, always improving</p>
             </div>
-            <div className="text-center group">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Lightbulb className="w-8 h-8 text-white" />
+            <div className="col-12 col-sm-6 col-lg-3 text-center">
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                  <Lightbulb className="text-white" size={32} />
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Practical Innovation</h3>
+              <h3 className="h5 fw-semibold mb-2">Practical Innovation</h3>
               <p className="text-muted-foreground">Smart solutions that deliver real results</p>
             </div>
           </div>
@@ -137,43 +143,43 @@ const Careers = () => {
             <h2 className="text-4xl font-bold text-center mb-16 text-foreground">
               Current Openings
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="row g-4">
               {openings.map((job, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300 group">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors duration-300">
-                          {job.title}
-                        </CardTitle>
-                        <CardDescription className="flex items-center space-x-4">
-                          <Badge variant="secondary">{job.type}</Badge>
-                          <Badge variant="outline">{job.department}</Badge>
-                        </CardDescription>
+                <div key={index} className="col-12 col-md-6">
+                  <div className="card h-100 hover-shadow-lg transition-shadow duration-300">
+                    <div className="card-header bg-transparent">
+                      <div className="d-flex align-items-start justify-content-between">
+                        <div>
+                          <h3 className="card-title h5 mb-2">
+                            {job.title}
+                          </h3>
+                          <div className="d-flex gap-2">
+                            <span className="badge bg-secondary">{job.type}</span>
+                            <span className="badge bg-outline-primary">{job.department}</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="flex items-center space-x-2 text-muted-foreground">
-                        <MapPin className="w-4 h-4" />
-                        <span>{job.location}</span>
+                    <div className="card-body">
+                      <div className="mb-3">
+                        <div className="d-flex align-items-center mb-2 text-muted-foreground">
+                          <MapPin size={16} className="me-2" />
+                          <span>{job.location}</span>
+                        </div>
+                        <div className="d-flex align-items-center text-muted-foreground">
+                          <Clock size={16} className="me-2" />
+                          <span>Apply by: Open until filled</span>
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-2 text-muted-foreground">
-                        <Clock className="w-4 h-4" />
-                        <span>Apply by: Open until filled</span>
-                      </div>
-                    </div>
-                    <Button 
-                      className="w-full mt-6 bg-gradient-primary hover:shadow-primary"
-                      asChild
-                    >
-                      <a href="mailto:careers@optimind.com?subject=Application for {job.title}">
+                      <a 
+                        href={`mailto:careers@optimind.com?subject=Application for ${job.title}`}
+                        className="btn btn-primary w-100 bg-gradient-primary"
+                      >
                         Apply Now
                       </a>
-                    </Button>
-                  </CardContent>
-                </Card>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -191,17 +197,13 @@ const Careers = () => {
               We're always interested in connecting with talented individuals. 
               Send us your resume and let us know how you'd like to contribute to our mission.
             </p>
-            <Button 
-              size="lg" 
-              variant="hero"
-              className="text-lg px-8 py-4"
-              asChild
+            <a 
+              href="mailto:careers@optimind.com?subject=General Application"
+              className="btn btn-outline-light btn-lg d-inline-flex align-items-center"
             >
-              <a href="mailto:careers@optimind.com?subject=General Application">
-                <Mail className="w-5 h-5 mr-2" />
-                Send Your Resume
-              </a>
-            </Button>
+              <Mail className="me-2" size={20} />
+              Send Your Resume
+            </a>
           </div>
         </div>
       </section>

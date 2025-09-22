@@ -1,6 +1,4 @@
 import { ArrowRight, CheckCircle, Users, Building2, Shield, Zap, Cloud, Code, Cog, TrendingUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -76,33 +74,20 @@ const Home = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
-                size="lg" 
-                className="bg-white text-primary hover:bg-white/90 hover:shadow-glow font-semibold px-8 py-4 text-lg"
-                asChild
-              >
-                <Link to="/contact">
-                  Get a Free Consultation
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </Button>
-              <Button 
-                variant="hero" 
-                size="lg"
-                className="font-semibold px-8 py-4 text-lg"
-                asChild
-              >
-                <Link to="/services">
-                  Explore Services
-                </Link>
-              </Button>
+              <Link to="/contact" className="btn btn-light btn-lg px-4 py-3 d-flex align-items-center">
+                Get a Free Consultation
+                <ArrowRight className="ms-2" size={20} />
+              </Link>
+              <Link to="/services" className="btn btn-outline-light btn-lg px-4 py-3">
+                Explore Services
+              </Link>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 animate-slide-up">
+          <div className="row g-4 mt-5 animate-slide-up">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="col-6 col-md-3 text-center">
                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {stat.number}
                 </div>
@@ -127,39 +112,31 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="row g-4">
             {services.map((service, index) => (
-              <Card 
-                key={index} 
-                className="group hover:shadow-primary transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg animate-scale-in"
-                style={{animationDelay: `${index * 0.1}s`}}
-              >
-                <CardContent className="p-8">
-                  <div className="text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
-                    {service.icon}
+              <div key={index} className="col-12 col-md-6 col-lg-4">
+                <div className="card h-100 border-0 shadow hover-shadow-primary transition-all duration-300 animate-scale-in" style={{animationDelay: `${index * 0.1}s`}}>
+                  <div className="card-body p-4">
+                    <div className="text-primary mb-3">
+                      {service.icon}
+                    </div>
+                    <h3 className="card-title h5 text-foreground mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="card-text text-muted-foreground">
+                      {service.description}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {service.description}
-                  </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Button 
-              size="lg" 
-              className="bg-gradient-primary hover:shadow-primary"
-              asChild
-            >
-              <Link to="/services">
-                View All Services
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
+          <div className="text-center mt-5">
+            <Link to="/services" className="btn btn-primary btn-lg bg-gradient-primary">
+              View All Services
+              <ArrowRight className="ms-2" size={20} />
+            </Link>
           </div>
         </div>
       </section>
@@ -167,61 +144,73 @@ const Home = () => {
       {/* Why Choose Us Section */}
       <section className="py-20 bg-gradient-subtle">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="animate-fade-in">
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-8">
+          <div className="row align-items-center g-5">
+            <div className="col-12 col-lg-6 animate-fade-in">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
                 Why Choose OptiMind?
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
                 We combine deep technical expertise with business acumen to deliver solutions that 
                 drive real results. Our client-first approach ensures every project exceeds expectations.
               </p>
               
-              <div className="space-y-4 mb-8">
+              <div className="mb-4">
                 {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="w-6 h-6 text-secondary flex-shrink-0" />
-                    <span className="text-foreground font-medium">{benefit}</span>
+                  <div key={index} className="d-flex align-items-center mb-3">
+                    <CheckCircle className="text-secondary me-3 flex-shrink-0" size={24} />
+                    <span className="text-foreground fw-medium">{benefit}</span>
                   </div>
                 ))}
               </div>
 
-              <Button 
-                size="lg" 
-                className="bg-gradient-secondary hover:shadow-primary"
-                asChild
-              >
-                <Link to="/about">
-                  Learn More About Us
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </Button>
+              <Link to="/about" className="btn btn-primary btn-lg bg-gradient-secondary">
+                Learn More About Us
+                <ArrowRight className="ms-2" size={20} />
+              </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 animate-slide-up">
-              <Card className="p-6 text-center hover:shadow-lg transition-shadow duration-300">
-                <Users className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Expert Team</h3>
-                <p className="text-sm text-muted-foreground">Certified professionals with years of experience</p>
-              </Card>
-              
-              <Card className="p-6 text-center hover:shadow-lg transition-shadow duration-300 mt-8">
-                <Building2 className="w-12 h-12 text-secondary mx-auto mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Enterprise Grade</h3>
-                <p className="text-sm text-muted-foreground">Solutions built for scale and reliability</p>
-              </Card>
-              
-              <Card className="p-6 text-center hover:shadow-lg transition-shadow duration-300">
-                <Shield className="w-12 h-12 text-accent mx-auto mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Secure & Compliant</h3>
-                <p className="text-sm text-muted-foreground">Bank-level security and industry compliance</p>
-              </Card>
-              
-              <Card className="p-6 text-center hover:shadow-lg transition-shadow duration-300 mt-8">
-                <Zap className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Fast Delivery</h3>
-                <p className="text-sm text-muted-foreground">Agile development with quick turnarounds</p>
-              </Card>
+            <div className="col-12 col-lg-6">
+              <div className="row g-3 animate-slide-up">
+                <div className="col-6">
+                  <div className="card text-center p-3 h-100">
+                    <div className="card-body">
+                      <Users className="text-primary mx-auto mb-3" size={48} />
+                      <h5 className="fw-semibold text-foreground mb-2">Expert Team</h5>
+                      <p className="small text-muted-foreground">Certified professionals with years of experience</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="col-6" style={{marginTop: '2rem'}}>
+                  <div className="card text-center p-3 h-100">
+                    <div className="card-body">
+                      <Building2 className="text-secondary mx-auto mb-3" size={48} />
+                      <h5 className="fw-semibold text-foreground mb-2">Enterprise Grade</h5>
+                      <p className="small text-muted-foreground">Solutions built for scale and reliability</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="col-6">
+                  <div className="card text-center p-3 h-100">
+                    <div className="card-body">
+                      <Shield className="text-accent mx-auto mb-3" size={48} />
+                      <h5 className="fw-semibold text-foreground mb-2">Secure & Compliant</h5>
+                      <p className="small text-muted-foreground">Bank-level security and industry compliance</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="col-6" style={{marginTop: '2rem'}}>
+                  <div className="card text-center p-3 h-100">
+                    <div className="card-body">
+                      <Zap className="text-primary mx-auto mb-3" size={48} />
+                      <h5 className="fw-semibold text-foreground mb-2">Fast Delivery</h5>
+                      <p className="small text-muted-foreground">Agile development with quick turnarounds</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -230,35 +219,22 @@ const Home = () => {
       {/* CTA Section */}
       <section className="py-20 bg-muted-dark text-white">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
             Ready to Transform Your Business?
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 mb-5 max-w-3xl mx-auto">
             Let's discuss how OptiMind Technologies can help you achieve your digital transformation goals. 
             Get started with a free consultation today.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary-light font-semibold px-8 py-4 text-lg"
-              asChild
-            >
-              <Link to="/contact">
-                Schedule Free Consultation
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-gray-400 text-white hover:bg-white/10 font-semibold px-8 py-4 text-lg"
-              asChild
-            >
-              <Link to="/case-studies">
-                View Case Studies
-              </Link>
-            </Button>
+          <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <Link to="/contact" className="btn btn-primary btn-lg">
+              Schedule Free Consultation
+              <ArrowRight className="ms-2" size={20} />
+            </Link>
+            <Link to="/case-studies" className="btn btn-outline-light btn-lg">
+              View Case Studies
+            </Link>
           </div>
         </div>
       </section>
