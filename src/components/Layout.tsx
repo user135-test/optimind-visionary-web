@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import optimindLogo from "@/assets/optimind-logo.png";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -64,13 +65,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
             {/* CTA Button */}
             <div className="hidden lg:flex items-center space-x-4">
-              <button className="btn btn-outline-primary btn-sm d-flex align-items-center">
-                <Phone className="w-4 h-4 me-2" />
+              <Button variant="outline" size="sm" className="border-muted-foreground text-muted-foreground hover:bg-muted hover:text-foreground">
+                <Phone className="w-4 h-4 mr-2" />
                 Call Us
-              </button>
-              <button className="btn btn-primary bg-gradient-primary">
+              </Button>
+              <Button className="bg-gradient-primary hover:shadow-primary text-white">
                 Get Started
-              </button>
+              </Button>
             </div>
 
             {/* Mobile menu button */}
@@ -103,13 +104,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   </Link>
                 ))}
                 <div className="pt-4 border-t">
-                  <button className="btn btn-outline-primary w-100 mb-3 d-flex align-items-center justify-content-center">
-                    <Phone className="w-4 h-4 me-2" />
+                  <Button variant="outline" className="w-full mb-3">
+                    <Phone className="w-4 h-4 mr-2" />
                     Call Us
-                  </button>
-                  <button className="btn btn-primary w-100 bg-gradient-primary">
+                  </Button>
+                  <Button className="w-full bg-gradient-primary">
                     Get Started
-                  </button>
+                  </Button>
                 </div>
               </nav>
             </div>

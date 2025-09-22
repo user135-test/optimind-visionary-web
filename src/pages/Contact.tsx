@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Linkedin, Twitter, Instagram } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -17,11 +22,13 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Handle form submission here
     toast({
       title: "Message Sent!",
       description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
     });
     
+    // Reset form
     setFormData({
       name: "",
       email: "",
@@ -42,26 +49,49 @@ const Contact = () => {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
       content: "contact@optimind.com",
-      description: "Send us an email anytime"
+      description: "Send us an email anytime",
+      action: "mailto:contact@optimind.com"
     },
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
       content: "+91-XXXXXXXXXX",
-      description: "Mon-Fri from 9am to 6pm"
+      description: "Mon-Fri from 9am to 6pm",
+      action: "tel:+91XXXXXXXXXX"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       title: "Visit Us",
       content: "Ranchi, Jharkhand, India",
-      description: "Come visit our office"
+      description: "Come visit our office",
+      action: "#"
     },
     {
       icon: <Clock className="w-6 h-6" />,
       title: "Working Hours",
       content: "Monday - Friday",
-      description: "9:00 AM - 6:00 PM IST"
+      description: "9:00 AM - 6:00 PM IST",
+      action: "#"
     }
+  ];
+
+  const services = [
+    "IT Consulting & Strategy",
+    "Custom Software Development",
+    "Cloud Solutions & Migration",
+    "Cybersecurity Services",
+    "Business Process Automation",
+    "Digital Transformation",
+    "Other"
+  ];
+
+  const budgetRanges = [
+    "Under ₹50,000",
+    "₹50,000 - ₹1,00,000",
+    "₹1,00,000 - ₹5,00,000",
+    "₹5,00,000 - ₹10,00,000",
+    "Above ₹10,00,000",
+    "Let's Discuss"
   ];
 
   const benefits = [
@@ -93,195 +123,269 @@ const Contact = () => {
       {/* Contact Info Cards */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
-          <div className="row g-4 mb-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             {contactInfo.map((info, index) => (
-              <div key={index} className="col-12 col-sm-6 col-lg-3">
-                <div className="card text-center p-4 h-100 hover-shadow-primary transition-all duration-300 animate-scale-in" style={{animationDelay: `${index * 0.1}s`}}>
-                  <div className="card-body">
-                    <div className="text-primary mb-3 d-flex justify-content-center">
-                      {info.icon}
-                    </div>
-                    <h3 className="h5 fw-semibold text-foreground mb-2">
-                      {info.title}
-                    </h3>
-                    <p className="text-foreground fw-medium mb-2">
-                      {info.content}
-                    </p>
-                    <p className="small text-muted-foreground">
-                      {info.description}
-                    </p>
+              <Card 
+                key={index}
+                className="text-center p-6 hover:shadow-primary transition-all duration-300 hover:-translate-y-2 animate-scale-in"
+                style={{animationDelay: `${index * 0.1}s`}}
+              >
+                <CardContent className="p-0">
+                  <div className="text-primary mb-4 flex justify-center">
+                    {info.icon}
                   </div>
-                </div>
-              </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                    {info.title}
+                  </h3>
+                  <p className="text-foreground font-medium mb-2">
+                    {info.content}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {info.description}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
 
           {/* Main Contact Section */}
-          <div className="row g-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Form */}
-            <div className="col-12 col-lg-8">
-              <div className="card p-4 animate-fade-in">
-                <div className="card-header bg-transparent border-0 pb-0 mb-4">
-                  <h2 className="text-3xl font-display font-bold text-foreground">
+            <div className="lg:col-span-2">
+              <Card className="p-8 animate-fade-in">
+                <CardHeader className="p-0 mb-8">
+                  <CardTitle className="text-3xl font-display font-bold text-foreground">
                     Start Your Project
-                  </h2>
+                  </CardTitle>
                   <p className="text-lg text-muted-foreground">
                     Fill out the form below and we'll get back to you within 24 hours with a detailed proposal.
                   </p>
-                </div>
+                </CardHeader>
                 
-                <form onSubmit={handleSubmit}>
-                  <div className="row g-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="form-label">Full Name *</label>
-                      <input
-                        type="text"
-                        className="form-control"
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="name">Full Name *</Label>
+                      <Input
+                        id="name"
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
                         placeholder="Your full name"
                         required
+                        className="mt-2"
                       />
                     </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Email Address *</label>
-                      <input
+                    <div>
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input
+                        id="email"
                         type="email"
-                        className="form-control"
                         value={formData.email}
                         onChange={(e) => handleChange("email", e.target.value)}
                         placeholder="your.email@example.com"
                         required
+                        className="mt-2"
                       />
                     </div>
                   </div>
 
-                  <div className="row g-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="form-label">Company Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="company">Company Name</Label>
+                      <Input
+                        id="company"
                         value={formData.company}
                         onChange={(e) => handleChange("company", e.target.value)}
                         placeholder="Your company name"
+                        className="mt-2"
                       />
                     </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Phone Number</label>
-                      <input
-                        type="tel"
-                        className="form-control"
+                    <div>
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input
+                        id="phone"
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
                         placeholder="+91-XXXXXXXXXX"
+                        className="mt-2"
                       />
                     </div>
                   </div>
 
-                  <div className="row g-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="form-label">Service Required</label>
-                      <select 
-                        className="form-select" 
-                        value={formData.service} 
-                        onChange={(e) => handleChange("service", e.target.value)}
-                      >
-                        <option value="">Select a service</option>
-                        <option value="IT Consulting & Strategy">IT Consulting & Strategy</option>
-                        <option value="Custom Software Development">Custom Software Development</option>
-                        <option value="Cloud Solutions & Migration">Cloud Solutions & Migration</option>
-                        <option value="Cybersecurity Services">Cybersecurity Services</option>
-                        <option value="Business Process Automation">Business Process Automation</option>
-                        <option value="Digital Transformation">Digital Transformation</option>
-                        <option value="Other">Other</option>
-                      </select>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="service">Service Required</Label>
+                      <Select value={formData.service} onValueChange={(value) => handleChange("service", value)}>
+                        <SelectTrigger className="mt-2">
+                          <SelectValue placeholder="Select a service" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {services.map((service, index) => (
+                            <SelectItem key={index} value={service}>
+                              {service}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Project Budget</label>
-                      <select 
-                        className="form-select" 
-                        value={formData.budget} 
-                        onChange={(e) => handleChange("budget", e.target.value)}
-                      >
-                        <option value="">Select budget range</option>
-                        <option value="Under ₹50,000">Under ₹50,000</option>
-                        <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
-                        <option value="₹1,00,000 - ₹5,00,000">₹1,00,000 - ₹5,00,000</option>
-                        <option value="₹5,00,000 - ₹10,00,000">₹5,00,000 - ₹10,00,000</option>
-                        <option value="Above ₹10,00,000">Above ₹10,00,000</option>
-                        <option value="Let's Discuss">Let's Discuss</option>
-                      </select>
+                    <div>
+                      <Label htmlFor="budget">Project Budget</Label>
+                      <Select value={formData.budget} onValueChange={(value) => handleChange("budget", value)}>
+                        <SelectTrigger className="mt-2">
+                          <SelectValue placeholder="Select budget range" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {budgetRanges.map((range, index) => (
+                            <SelectItem key={index} value={range}>
+                              {range}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
 
-                  <div className="mb-4">
-                    <label className="form-label">Project Details *</label>
-                    <textarea
-                      className="form-control"
-                      rows={6}
+                  <div>
+                    <Label htmlFor="message">Project Details *</Label>
+                    <Textarea
+                      id="message"
                       value={formData.message}
                       onChange={(e) => handleChange("message", e.target.value)}
                       placeholder="Tell us about your project requirements, goals, and any specific challenges you're facing..."
                       required
+                      rows={6}
+                      className="mt-2"
                     />
                   </div>
 
-                  <button type="submit" className="btn btn-primary btn-lg w-100 bg-gradient-primary">
+                  <Button type="submit" size="lg" className="w-full bg-gradient-primary hover:shadow-primary">
                     Send Message
-                    <Send className="ms-2" size={20} />
-                  </button>
+                    <Send className="ml-2 w-5 h-5" />
+                  </Button>
                 </form>
-              </div>
+              </Card>
             </div>
 
             {/* Sidebar */}
-            <div className="col-12 col-lg-4">
+            <div className="space-y-8">
               {/* Why Choose Us */}
-              <div className="card p-4 mb-4 animate-fade-in" style={{animationDelay: '0.2s'}}>
-                <h3 className="h4 mb-4">Why Choose OptiMind?</h3>
-                <div className="mb-0">
-                  {benefits.map((benefit, index) => (
-                    <div key={index} className="d-flex align-items-start mb-3">
-                      <CheckCircle className="text-secondary me-3 flex-shrink-0 mt-1" size={20} />
-                      <span className="small text-muted-foreground">
-                        {benefit}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <Card className="p-6 animate-fade-in" style={{animationDelay: '0.2s'}}>
+                <CardHeader className="p-0 mb-6">
+                  <CardTitle className="text-xl">Why Choose OptiMind?</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="space-y-4">
+                    {benefits.map((benefit, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                        <span className="text-sm text-muted-foreground leading-relaxed">
+                          {benefit}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Social Links */}
-              <div className="card p-4 mb-4 animate-fade-in" style={{animationDelay: '0.3s'}}>
-                <h3 className="h4 mb-4">Connect With Us</h3>
-                <div className="d-grid gap-2">
-                  <a href="https://www.linkedin.com/in/optimind-technologies-8608b1385/" className="btn btn-outline-primary d-flex align-items-center">
-                    <Linkedin className="me-2" size={20} />
-                    LinkedIn
-                  </a>
-                  <a href="#" className="btn btn-outline-primary d-flex align-items-center">
-                    <Twitter className="me-2" size={20} />
-                    Twitter
-                  </a>
-                  <a href="#" className="btn btn-outline-primary d-flex align-items-center">
-                    <Instagram className="me-2" size={20} />
-                    Instagram
-                  </a>
-                </div>
-              </div>
+              <Card className="p-6 animate-fade-in" style={{animationDelay: '0.3s'}}>
+                <CardHeader className="p-0 mb-6">
+                  <CardTitle className="text-xl">Connect With Us</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="space-y-4">
+                    <a 
+                      href="https://www.linkedin.com/in/optimind-technologies-8608b1385/"
+                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    >
+                      <Linkedin className="w-5 h-5 text-primary" />
+                      <span className="text-foreground">LinkedIn</span>
+                    </a>
+                    <a 
+                      href="#"
+                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    >
+                      <Twitter className="w-5 h-5 text-primary" />
+                      <span className="text-foreground">Twitter</span>
+                    </a>
+                    <a 
+                      href="#"
+                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    >
+                      <Instagram className="w-5 h-5 text-primary" />
+                      <span className="text-foreground">Instagram</span>
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Emergency Contact */}
-              <div className="card bg-gradient-secondary text-white p-4 animate-fade-in" style={{animationDelay: '0.4s'}}>
-                <h3 className="h4 mb-3">Need Immediate Help?</h3>
-                <p className="text-white/90 mb-3">
-                  For urgent technical support or emergency assistance, contact us directly.
-                </p>
-                <button className="btn btn-light w-100">
-                  <Phone className="me-2" size={16} />
-                  Emergency Support
-                </button>
-              </div>
+              <Card className="p-6 bg-gradient-secondary text-white animate-fade-in" style={{animationDelay: '0.4s'}}>
+                <CardHeader className="p-0 mb-4">
+                  <CardTitle className="text-xl">Need Immediate Help?</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <p className="text-white/90 mb-4">
+                    For urgent technical support or emergency assistance, contact us directly.
+                  </p>
+                  <Button variant="secondary" className="w-full">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Emergency Support
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16 animate-fade-in">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-xl text-muted-foreground">
+                Quick answers to common questions about our services and process
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                {
+                  question: "How long does a typical project take?",
+                  answer: "Project timelines vary based on complexity, but most projects are completed within 2-6 months. We provide detailed timelines during the consultation phase."
+                },
+                {
+                  question: "Do you provide ongoing support?",
+                  answer: "Yes, we offer comprehensive post-launch support and maintenance packages to ensure your systems continue to perform optimally."
+                },
+                {
+                  question: "What technologies do you work with?",
+                  answer: "We work with modern technologies including React, Node.js, AWS, Azure, and more. We choose the best technology stack for each project."
+                },
+                {
+                  question: "How do you ensure project security?",
+                  answer: "We implement industry-standard security practices, conduct regular security audits, and ensure compliance with relevant regulations."
+                }
+              ].map((faq, index) => (
+                <Card 
+                  key={index}
+                  className="p-6 animate-scale-in"
+                  style={{animationDelay: `${index * 0.1}s`}}
+                >
+                  <CardContent className="p-0">
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
+                      {faq.question}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </div>

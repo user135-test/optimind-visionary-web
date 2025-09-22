@@ -1,4 +1,7 @@
 import { ArrowRight, Calendar, User, Clock, Tag, TrendingUp, Shield, Cloud, Code } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 
 const Blog = () => {
@@ -52,6 +55,26 @@ const Blog = () => {
       category: "Development",
       tags: ["React", "Node.js", "Scalability"],
       icon: <TrendingUp className="w-6 h-6" />
+    },
+    {
+      title: "Data Backup Strategies for Small Businesses",
+      excerpt: "Essential backup strategies to protect your business data and ensure quick recovery from unexpected data loss incidents.",
+      author: "Data Management Specialist",
+      date: "November 15, 2024",
+      readTime: "5 min read",
+      category: "Data Management",
+      tags: ["Backup", "Data Security", "Recovery"],
+      icon: <Shield className="w-6 h-6" />
+    },
+    {
+      title: "ROI of Digital Transformation: Measuring Success",
+      excerpt: "How to calculate and track the return on investment for your digital transformation initiatives with practical metrics.",
+      author: "Business Analyst",
+      date: "November 8, 2024",
+      readTime: "9 min read",
+      category: "Digital Transformation",
+      tags: ["ROI", "Analytics", "Strategy"],
+      icon: <TrendingUp className="w-6 h-6" />
     }
   ];
 
@@ -84,56 +107,56 @@ const Blog = () => {
       {/* Featured Post */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
-          <div className="card overflow-hidden hover-shadow-primary transition-all duration-300 animate-fade-in">
-            <div className="row g-0">
-              {/* Content */}
-              <div className="col-12 col-lg-6">
-                <div className="card-body p-5">
-                  <span className="badge bg-primary text-white mb-3">
+          <div className="max-w-6xl mx-auto">
+            <Card className="overflow-hidden hover:shadow-primary transition-all duration-300 animate-fade-in">
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                {/* Content */}
+                <div className="p-8 lg:p-12">
+                  <Badge className="mb-4 bg-primary text-white">
                     Featured Article
-                  </span>
-                  <h2 className="card-title h2 font-display font-bold text-foreground mb-3">
+                  </Badge>
+                  <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                     {featuredPost.title}
                   </h2>
-                  <p className="card-text text-lg text-muted-foreground mb-4 leading-relaxed">
+                  <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                     {featuredPost.excerpt}
                   </p>
                   
-                  <div className="d-flex flex-wrap gap-3 text-sm text-muted-foreground mb-4">
-                    <div className="d-flex align-items-center">
-                      <User className="me-1" size={16} />
+                  <div className="flex items-center space-x-6 text-sm text-muted-foreground mb-8">
+                    <div className="flex items-center space-x-2">
+                      <User className="w-4 h-4" />
                       <span>{featuredPost.author}</span>
                     </div>
-                    <div className="d-flex align-items-center">
-                      <Calendar className="me-1" size={16} />
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="w-4 h-4" />
                       <span>{featuredPost.date}</span>
                     </div>
-                    <div className="d-flex align-items-center">
-                      <Clock className="me-1" size={16} />
+                    <div className="flex items-center space-x-2">
+                      <Clock className="w-4 h-4" />
                       <span>{featuredPost.readTime}</span>
                     </div>
                   </div>
 
-                  <button className="btn btn-primary bg-gradient-primary">
+                  <Button className="bg-gradient-primary hover:shadow-primary">
                     Read Full Article
-                    <ArrowRight className="ms-2" size={16} />
-                  </button>
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
                 </div>
-              </div>
 
-              {/* Image Placeholder */}
-              <div className="col-12 col-lg-6 bg-gradient-subtle d-flex align-items-center justify-content-center p-5">
-                <div className="text-center">
-                  <TrendingUp className="text-primary mx-auto mb-3" size={96} />
-                  <h3 className="h4 fw-semibold text-foreground mb-2">
-                    IT Trends 2025
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Featured Article Visual
-                  </p>
+                {/* Image Placeholder */}
+                <div className="bg-gradient-subtle flex items-center justify-center p-8">
+                  <div className="text-center">
+                    <TrendingUp className="w-24 h-24 text-primary mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold text-foreground mb-2">
+                      IT Trends 2025
+                    </h3>
+                    <p className="text-muted-foreground">
+                      Featured Article Visual
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
         </div>
       </section>
@@ -141,11 +164,11 @@ const Blog = () => {
       {/* Blog Posts Grid */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-6">
-          <div className="row g-5">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Main Content */}
-            <div className="col-12 col-lg-8">
-              <div className="mb-5 animate-fade-in">
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
+            <div className="lg:col-span-3">
+              <div className="mb-12 animate-fade-in">
+                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                   Latest Articles
                 </h2>
                 <p className="text-lg text-muted-foreground">
@@ -153,103 +176,126 @@ const Blog = () => {
                 </p>
               </div>
 
-              <div className="row g-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {blogPosts.map((post, index) => (
-                  <div key={index} className="col-12 col-md-6">
-                    <div className="card h-100 hover-shadow-primary transition-all duration-300 animate-scale-in" style={{animationDelay: `${index * 0.1}s`}}>
-                      <div className="card-header bg-transparent border-0 pb-2">
-                        <div className="d-flex align-items-center justify-content-between mb-3">
-                          <span className="badge bg-outline-secondary">{post.category}</span>
-                          <div className="text-primary">
-                            {post.icon}
-                          </div>
+                  <Card 
+                    key={index}
+                    className="group hover:shadow-primary transition-all duration-300 hover:-translate-y-2 animate-scale-in"
+                    style={{animationDelay: `${index * 0.1}s`}}
+                  >
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <Badge variant="outline">{post.category}</Badge>
+                        <div className="text-primary group-hover:scale-110 transition-transform duration-300">
+                          {post.icon}
                         </div>
-                        <h3 className="card-title h5">
-                          {post.title}
-                        </h3>
                       </div>
-                      <div className="card-body pt-2">
-                        <p className="card-text text-muted-foreground mb-3 leading-relaxed">
-                          {post.excerpt}
-                        </p>
-                        
-                        <div className="d-flex flex-wrap gap-2 text-sm text-muted-foreground mb-3">
-                          <div className="d-flex align-items-center">
-                            <Calendar size={12} className="me-1" />
-                            <span>{post.date}</span>
-                          </div>
-                          <div className="d-flex align-items-center">
-                            <Clock size={12} className="me-1" />
-                            <span>{post.readTime}</span>
-                          </div>
+                      <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
+                        {post.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground mb-4 leading-relaxed">
+                        {post.excerpt}
+                      </p>
+                      
+                      <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="w-3 h-3" />
+                          <span>{post.date}</span>
                         </div>
-
-                        <div className="mb-3">
-                          {post.tags.map((tag, tagIndex) => (
-                            <span key={tagIndex} className="badge bg-secondary me-1 text-xs">
-                              {tag}
-                            </span>
-                          ))}
+                        <div className="flex items-center space-x-1">
+                          <Clock className="w-3 h-3" />
+                          <span>{post.readTime}</span>
                         </div>
-
-                        <button className="btn btn-outline-primary btn-sm w-100">
-                          Read More
-                          <ArrowRight className="ms-2" size={12} />
-                        </button>
                       </div>
-                    </div>
-                  </div>
+
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {post.tags.map((tag, tagIndex) => (
+                          <Badge key={tagIndex} variant="secondary" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+
+                      <Button variant="outline" size="sm" className="w-full group-hover:bg-primary group-hover:text-white">
+                        Read More
+                        <ArrowRight className="ml-2 w-3 h-3" />
+                      </Button>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
 
               {/* Load More */}
-              <div className="text-center mt-5">
-                <button className="btn btn-outline-primary btn-lg">
+              <div className="text-center mt-12">
+                <Button size="lg" variant="outline" className="hover:bg-primary hover:text-white">
                   Load More Articles
-                  <ArrowRight className="ms-2" size={16} />
-                </button>
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
               </div>
             </div>
 
             {/* Sidebar */}
-            <div className="col-12 col-lg-4">
+            <div className="lg:col-span-1 space-y-8">
               {/* Categories */}
-              <div className="card p-4 mb-4 animate-fade-in">
-                <h3 className="h4 mb-4 d-flex align-items-center">
-                  <Tag className="text-primary me-2" size={20} />
+              <Card className="p-6 animate-fade-in">
+                <CardTitle className="text-xl mb-6 flex items-center">
+                  <Tag className="w-5 h-5 mr-2 text-primary" />
                   Categories
-                </h3>
-                <div className="d-grid gap-2">
+                </CardTitle>
+                <div className="space-y-3">
                   {categories.map((category, index) => (
-                    <div key={index} className="d-flex align-items-center justify-content-between p-2 rounded hover:bg-muted transition-colors cursor-pointer">
+                    <div 
+                      key={index}
+                      className="flex items-center justify-between p-2 rounded-lg hover:bg-muted transition-colors cursor-pointer"
+                    >
                       <span className="text-foreground">{category.name}</span>
-                      <span className="badge bg-secondary text-xs">
+                      <Badge variant="secondary" className="text-xs">
                         {category.count}
-                      </span>
+                      </Badge>
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
 
               {/* Newsletter Signup */}
-              <div className="card bg-gradient-primary text-white p-4 mb-4 animate-fade-in" style={{animationDelay: '0.2s'}}>
-                <h3 className="h4 mb-3">
+              <Card className="p-6 bg-gradient-primary text-white animate-fade-in" style={{animationDelay: '0.2s'}}>
+                <CardTitle className="text-xl mb-4">
                   Stay Updated
-                </h3>
-                <p className="text-white/90 mb-4">
+                </CardTitle>
+                <p className="text-white/90 mb-6">
                   Get the latest tech insights and updates delivered to your inbox.
                 </p>
-                <div className="mb-3">
+                <div className="space-y-3">
                   <input 
                     type="email" 
-                    className="form-control mb-3"
                     placeholder="Your email address"
+                    className="w-full p-3 rounded-lg text-foreground"
                   />
-                  <button className="btn btn-light w-100">
+                  <Button variant="secondary" className="w-full">
                     Subscribe
-                  </button>
+                  </Button>
                 </div>
-              </div>
+              </Card>
+
+              {/* Popular Tags */}
+              <Card className="p-6 animate-fade-in" style={{animationDelay: '0.3s'}}>
+                <CardTitle className="text-xl mb-6">
+                  Popular Tags
+                </CardTitle>
+                <div className="flex flex-wrap gap-2">
+                  {["React", "AWS", "Security", "Node.js", "Cloud", "AI", "Automation", "DevOps"].map((tag, index) => (
+                    <Badge 
+                      key={index} 
+                      variant="outline" 
+                      className="cursor-pointer hover:bg-primary hover:text-white transition-colors"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </Card>
             </div>
           </div>
         </div>
@@ -266,14 +312,27 @@ const Blog = () => {
             and implement solutions that drive your business forward.
           </p>
           
-          <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact" className="btn btn-primary btn-lg">
-              Schedule Consultation
-              <ArrowRight className="ms-2" size={20} />
-            </Link>
-            <Link to="/services" className="btn btn-outline-light btn-lg">
-              View Services
-            </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-light font-semibold px-8 py-4 text-lg"
+              asChild
+            >
+              <Link to="/contact">
+                Schedule Consultation
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-gray-400 text-white hover:bg-white/10 font-semibold px-8 py-4 text-lg"
+              asChild
+            >
+              <Link to="/services">
+                View Services
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

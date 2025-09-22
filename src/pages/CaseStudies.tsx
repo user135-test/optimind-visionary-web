@@ -1,4 +1,7 @@
 import { ArrowRight, ExternalLink, Calendar, Building2, Users, TrendingUp, Clock, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 
 const CaseStudies = () => {
@@ -115,78 +118,86 @@ const CaseStudies = () => {
         <div className="container mx-auto px-6">
           <div className="space-y-20">
             {caseStudies.map((study, index) => (
-              <div key={index} className={`row g-5 align-items-center animate-fade-in ${index % 2 === 1 ? 'flex-row-reverse' : ''}`} style={{animationDelay: `${index * 0.2}s`}}>
+              <div 
+                key={index}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-fade-in ${
+                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
+                }`}
+                style={{animationDelay: `${index * 0.2}s`}}
+              >
                 {/* Content */}
-                <div className="col-12 col-lg-6">
-                  <div className="d-flex align-items-center gap-3 mb-4">
-                    <span className="badge bg-secondary">{study.industry}</span>
-                    <div className="d-flex align-items-center text-muted-foreground">
-                      <Calendar size={16} className="me-1" />
-                      <span className="small">{study.duration}</span>
+                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                  <div className="flex items-center space-x-4 mb-6">
+                    <Badge variant="secondary" className="text-sm">
+                      {study.industry}
+                    </Badge>
+                    <div className="flex items-center space-x-2 text-muted-foreground">
+                      <Calendar className="w-4 h-4" />
+                      <span className="text-sm">{study.duration}</span>
                     </div>
-                    <div className="d-flex align-items-center text-muted-foreground">
-                      <Users size={16} className="me-1" />
-                      <span className="small">{study.team}</span>
+                    <div className="flex items-center space-x-2 text-muted-foreground">
+                      <Users className="w-4 h-4" />
+                      <span className="text-sm">{study.team}</span>
                     </div>
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">
+                  <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                     {study.title}
                   </h2>
                   
-                  <p className="text-lg text-primary fw-semibold mb-4">
+                  <p className="text-lg text-primary font-semibold mb-6">
                     {study.client}
                   </p>
 
-                  <div className="mb-4">
-                    <h3 className="h5 fw-semibold text-foreground mb-2">Challenge</h3>
-                    <p className="text-muted-foreground">{study.challenge}</p>
-                  </div>
-
-                  <div className="mb-4">
-                    <h3 className="h5 fw-semibold text-foreground mb-2">Solution</h3>
-                    <p className="text-muted-foreground">{study.solution}</p>
-                  </div>
-
-                  <div className="mb-4">
-                    <h3 className="h5 fw-semibold text-foreground mb-3">Results</h3>
-                    <div className="row g-2">
-                      {study.results.map((result, resultIndex) => (
-                        <div key={resultIndex} className="col-12 col-md-6">
-                          <div className="d-flex align-items-center">
-                            <CheckCircle className="text-secondary me-2 flex-shrink-0" size={20} />
-                            <span className="text-muted-foreground fw-medium small">{result}</span>
-                          </div>
-                        </div>
-                      ))}
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Challenge</h3>
+                      <p className="text-muted-foreground leading-relaxed">{study.challenge}</p>
                     </div>
-                  </div>
 
-                  <div>
-                    <h3 className="h5 fw-semibold text-foreground mb-3">Technologies Used</h3>
-                    <div className="d-flex flex-wrap gap-1">
-                      {study.technologies.map((tech, techIndex) => (
-                        <span key={techIndex} className="badge bg-outline-primary">
-                          {tech}
-                        </span>
-                      ))}
+                    <div>
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Solution</h3>
+                      <p className="text-muted-foreground leading-relaxed">{study.solution}</p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-foreground mb-3">Results</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {study.results.map((result, resultIndex) => (
+                          <div key={resultIndex} className="flex items-center space-x-2">
+                            <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0" />
+                            <span className="text-muted-foreground font-medium">{result}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-foreground mb-3">Technologies Used</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {study.technologies.map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="outline">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Image Placeholder */}
-                <div className="col-12 col-lg-6">
-                  <div className="card h-96 bg-gradient-subtle d-flex align-items-center justify-content-center hover-shadow-primary transition-shadow duration-300">
-                    <div className="card-body text-center p-5">
-                      <Building2 className="text-primary mx-auto mb-3" size={96} />
-                      <h3 className="h4 fw-semibold text-foreground mb-2">
+                <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
+                  <Card className="h-96 bg-gradient-subtle flex items-center justify-center hover:shadow-primary transition-shadow duration-300">
+                    <CardContent className="text-center p-8">
+                      <Building2 className="w-24 h-24 text-primary mx-auto mb-4" />
+                      <h3 className="text-2xl font-semibold text-foreground mb-2">
                         {study.title}
                       </h3>
                       <p className="text-muted-foreground">
                         Visual representation of the project implementation
                       </p>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             ))}
@@ -206,26 +217,69 @@ const CaseStudies = () => {
             </p>
           </div>
 
-          <div className="row g-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="col-12 col-md-4">
-                <div className="card p-4 h-100 hover-shadow-primary transition-all duration-300 animate-scale-in" style={{animationDelay: `${index * 0.1}s`}}>
-                  <div className="card-body">
-                    <div className="d-flex mb-3">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <TrendingUp key={i} className="text-accent" size={20} />
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground mb-4 fst-italic">
-                      "{testimonial.content}"
-                    </p>
-                    <div>
-                      <h4 className="fw-semibold text-foreground mb-1">{testimonial.name}</h4>
-                      <p className="small text-primary mb-0">{testimonial.position}</p>
-                    </div>
+              <Card 
+                key={index}
+                className="p-6 hover:shadow-primary transition-all duration-300 hover:-translate-y-2 animate-scale-in"
+                style={{animationDelay: `${index * 0.1}s`}}
+              >
+                <CardContent className="p-0">
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <TrendingUp key={i} className="w-5 h-5 text-accent fill-current" />
+                    ))}
                   </div>
-                </div>
-              </div>
+                  <p className="text-muted-foreground leading-relaxed mb-6 italic">
+                    "{testimonial.content}"
+                  </p>
+                  <div>
+                    <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                    <p className="text-sm text-primary">{testimonial.position}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio Stats */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
+              Our Portfolio Impact
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Measurable results that demonstrate our commitment to delivering exceptional value
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {[
+              { number: "50+", label: "Projects Completed", icon: <Building2 className="w-8 h-8" /> },
+              { number: "25+", label: "Happy Clients", icon: <Users className="w-8 h-8" /> },
+              { number: "99.9%", label: "Average Uptime", icon: <TrendingUp className="w-8 h-8" /> },
+              { number: "24/7", label: "Support Available", icon: <Clock className="w-8 h-8" /> }
+            ].map((stat, index) => (
+              <Card 
+                key={index}
+                className="p-6 text-center hover:shadow-primary transition-all duration-300 hover:-translate-y-2 animate-scale-in"
+                style={{animationDelay: `${index * 0.1}s`}}
+              >
+                <CardContent className="p-0">
+                  <div className="text-primary mb-4 flex justify-center">
+                    {stat.icon}
+                  </div>
+                  <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+                    {stat.number}
+                  </div>
+                  <p className="text-muted-foreground font-medium">
+                    {stat.label}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -242,14 +296,27 @@ const CaseStudies = () => {
             with OptiMind Technologies. Let's create your success story together.
           </p>
           
-          <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact" className="btn btn-primary btn-lg">
-              Start Your Project
-              <ArrowRight className="ms-2" size={20} />
-            </Link>
-            <Link to="/services" className="btn btn-outline-light btn-lg">
-              Explore Services
-            </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-light font-semibold px-8 py-4 text-lg"
+              asChild
+            >
+              <Link to="/contact">
+                Start Your Project
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-gray-400 text-white hover:bg-white/10 font-semibold px-8 py-4 text-lg"
+              asChild
+            >
+              <Link to="/services">
+                Explore Services
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

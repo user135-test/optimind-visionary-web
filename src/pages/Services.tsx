@@ -1,4 +1,6 @@
 import { ArrowRight, Code, Cloud, Shield, Cog, TrendingUp, Users, CheckCircle, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
 const Services = () => {
@@ -140,38 +142,40 @@ const Services = () => {
       {/* Services Grid */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
-          <div className="row g-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="col-12 col-md-6 col-lg-4">
-                <div className="card h-100 hover-shadow-primary transition-all duration-300 animate-scale-in" style={{animationDelay: `${index * 0.1}s`}}>
-                  <div className="card-header bg-transparent border-0 pb-2">
-                    <div className="text-primary mb-3">
-                      {service.icon}
-                    </div>
-                    <h3 className="card-title text-xl text-foreground">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground">{service.description}</p>
+              <Card 
+                key={index}
+                className="group hover:shadow-primary transition-all duration-300 hover:-translate-y-2 animate-scale-in"
+                style={{animationDelay: `${index * 0.1}s`}}
+              >
+                <CardHeader className="pb-4">
+                  <div className="text-primary mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {service.icon}
                   </div>
-                  <div className="card-body pt-2">
-                    <ul className="list-unstyled mb-4">
-                      {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="d-flex align-items-center mb-2">
-                          <CheckCircle className="text-secondary me-2 flex-shrink-0" size={16} />
-                          <span className="small text-muted-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="border-top pt-3">
-                      <p className="text-primary fw-semibold mb-3">{service.price}</p>
-                      <button className="btn btn-primary w-100 bg-gradient-primary">
-                        Get Quote
-                        <ArrowRight className="ms-2" size={16} />
-                      </button>
-                    </div>
+                  <CardTitle className="text-xl text-foreground">
+                    {service.title}
+                  </CardTitle>
+                  <p className="text-muted-foreground">{service.description}</p>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 mb-6">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center space-x-2">
+                        <CheckCircle className="w-4 h-4 text-secondary flex-shrink-0" />
+                        <span className="text-sm text-muted-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="border-t pt-4">
+                    <p className="text-primary font-semibold mb-4">{service.price}</p>
+                    <Button className="w-full bg-gradient-primary hover:shadow-primary">
+                      Get Quote
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -189,15 +193,56 @@ const Services = () => {
             </p>
           </div>
 
-          <div className="row g-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((benefit, index) => (
-              <div key={index} className="col-12 col-md-6 col-lg-4">
-                <div className="d-flex align-items-center animate-slide-up" style={{animationDelay: `${index * 0.1}s`}}>
-                  <Star className="text-accent me-3 flex-shrink-0" size={24} />
-                  <span className="text-foreground fw-medium">{benefit}</span>
-                </div>
+              <div 
+                key={index}
+                className="flex items-center space-x-3 animate-slide-up"
+                style={{animationDelay: `${index * 0.1}s`}}
+              >
+                <Star className="w-6 h-6 text-accent flex-shrink-0" />
+                <span className="text-foreground font-medium">{benefit}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Process */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
+              Our Process
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              A proven methodology that ensures successful project delivery and client satisfaction
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+              {process.map((item, index) => (
+                <div 
+                  key={index}
+                  className="text-center animate-scale-in"
+                  style={{animationDelay: `${index * 0.2}s`}}
+                >
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-white font-bold text-lg mb-4 mx-auto">
+                    {item.step}
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {item.description}
+                  </p>
+                  {index < process.length - 1 && (
+                    <div className="hidden md:block absolute top-8 left-full w-8 h-0.5 bg-primary/30"></div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -213,14 +258,27 @@ const Services = () => {
             that drives your business forward. Get a free consultation today.
           </p>
           
-          <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact" className="btn btn-primary btn-lg">
-              Get Free Consultation
-              <ArrowRight className="ms-2" size={20} />
-            </Link>
-            <Link to="/case-studies" className="btn btn-outline-light btn-lg">
-              View Our Work
-            </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-light font-semibold px-8 py-4 text-lg"
+              asChild
+            >
+              <Link to="/contact">
+                Get Free Consultation
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-gray-400 text-white hover:bg-white/10 font-semibold px-8 py-4 text-lg"
+              asChild
+            >
+              <Link to="/case-studies">
+                View Our Work
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
