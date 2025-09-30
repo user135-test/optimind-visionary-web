@@ -168,10 +168,11 @@ const Services = () => {
                     ))}
                   </ul>
                   <div className="border-t pt-4">
-                    <p className="text-primary font-semibold mb-4">{service.price}</p>
-                    <Button className="w-full bg-gradient-primary hover:shadow-primary">
-                      Get Quote
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                    <Button className="w-full bg-gradient-primary hover:shadow-primary" asChild>
+                      <Link to="/contact">
+                        Contact Us
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>
