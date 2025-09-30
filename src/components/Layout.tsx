@@ -24,7 +24,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     { name: "Case Studies", path: "/case-studies" },
     { name: "Blog", path: "/blog" },
     { name: "Careers", path: "/careers" },
-    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -47,7 +46,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-8 flex-1 justify-start ml-8">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -63,16 +62,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               ))}
             </nav>
 
-            {/* CTA Button */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <Button variant="outline" size="sm" className="border-muted-foreground text-muted-foreground hover:bg-muted hover:text-foreground">
-                <Phone className="w-4 h-4 mr-2" />
-                Call Us
-              </Button>
-              <Button className="bg-gradient-primary hover:shadow-primary text-white">
-                Get Started
-              </Button>
-            </div>
+            {/* Contact Link */}
+            <Link
+              to="/contact"
+              className={`hidden lg:block relative px-3 py-2 text-sm font-medium transition-colors duration-200 hover:text-primary ${
+                location.pathname === "/contact"
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              } after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 after:origin-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-left`}
+            >
+              Contact
+            </Link>
 
             {/* Mobile menu button */}
             <button
@@ -103,15 +103,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     {item.name}
                   </Link>
                 ))}
-                <div className="pt-4 border-t">
-                  <Button variant="outline" className="w-full mb-3">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call Us
-                  </Button>
-                  <Button className="w-full bg-gradient-primary">
-                    Get Started
-                  </Button>
-                </div>
+                <Link
+                  to="/contact"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`px-3 py-2 text-base font-medium transition-colors duration-200 hover:text-primary ${
+                    location.pathname === "/contact"
+                      ? "text-primary border-l-2 border-primary bg-primary/10"
+                      : "text-muted-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Contact
+                </Link>
               </nav>
             </div>
           </div>
