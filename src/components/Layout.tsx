@@ -46,7 +46,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8 flex-1 justify-start ml-8">
+            <nav className="hidden lg:flex items-center space-x-8 flex-1 justify-center">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -62,16 +62,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               ))}
             </nav>
 
-            {/* Contact Link */}
+            {/* Contact Button */}
             <Link
               to="/contact"
-              className={`hidden lg:block relative px-3 py-2 text-sm font-medium transition-colors duration-200 hover:text-primary ${
-                location.pathname === "/contact"
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              } after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 after:origin-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-left`}
+              className="hidden lg:block"
             >
-              Contact
+              <Button className="bg-gradient-primary hover:shadow-primary text-white">
+                Contact
+              </Button>
             </Link>
 
             {/* Mobile menu button */}
