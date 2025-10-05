@@ -1,7 +1,8 @@
-import { Users, Target, Award, Heart, BookOpen, Lightbulb, Shield, ArrowRight } from "lucide-react";
+import { Target, Award, Heart, BookOpen, Lightbulb, Shield, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import ComingSoonAnimation from "@/components/animations/ComingSoonAnimation";
 
 const About = () => {
   const values = [
@@ -245,30 +246,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((_, index) => (
-              <Card 
-                key={index}
-                className="p-6 text-center hover:shadow-primary transition-all duration-300 hover:-translate-y-2 animate-scale-in"
-                style={{animationDelay: `${index * 0.1}s`}}
-              >
-                <CardContent className="p-0">
-                  <div className="w-24 h-24 bg-gradient-primary rounded-full mx-auto mb-6 flex items-center justify-center">
-                    <Users className="w-12 h-12 text-white" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    Team Member {index + 1}
-                  </h3>
-                  <p className="text-primary font-medium mb-3">
-                    {index === 0 ? 'Chief Technology Officer' : index === 1 ? 'Lead Developer' : 'Solutions Architect'}
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Experienced professional with expertise in delivering enterprise-grade solutions and driving digital transformation.
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <ComingSoonAnimation />
         </div>
       </section>
 

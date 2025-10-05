@@ -1,16 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { 
   CheckCircle, 
   Users, 
   TrendingUp, 
   Heart, 
   Lightbulb,
-  MapPin,
-  Clock,
   Mail
 } from "lucide-react";
+import NoOpeningsAnimation from "@/components/animations/NoOpeningsAnimation";
 
 const Careers = () => {
   const benefits = [
@@ -137,45 +134,7 @@ const Careers = () => {
             <h2 className="text-4xl font-bold text-center mb-16 text-foreground">
               Current Openings
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {openings.map((job, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300 group">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors duration-300">
-                          {job.title}
-                        </CardTitle>
-                        <CardDescription className="flex items-center space-x-4">
-                          <Badge variant="secondary">{job.type}</Badge>
-                          <Badge variant="outline">{job.department}</Badge>
-                        </CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="flex items-center space-x-2 text-muted-foreground">
-                        <MapPin className="w-4 h-4" />
-                        <span>{job.location}</span>
-                      </div>
-                      <div className="flex items-center space-x-2 text-muted-foreground">
-                        <Clock className="w-4 h-4" />
-                        <span>Apply by: Open until filled</span>
-                      </div>
-                    </div>
-                    <Button 
-                      className="w-full mt-6 bg-gradient-primary hover:shadow-primary"
-                      asChild
-                    >
-                      <a href="mailto:careers@optimind.com?subject=Application for {job.title}">
-                        Apply Now
-                      </a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <NoOpeningsAnimation />
           </div>
         </div>
       </section>
